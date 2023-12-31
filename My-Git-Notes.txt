@@ -1,0 +1,263 @@
+To start with git or to track who are updating it it nees username and email
+
+$ git config --global user.email "umerhasan.learning@gmail.com"
+
+$ git config --global user.email "umerhasan.learning@gmail.com"
+
+$ git status
+fatal: not a git repository (or any of the parent directories): .git
+
+To set Default branch name 
+$ git config --global init.default branch main
+
+To change to project directory
+$ cd "D:\DevOps\git-test-proj"
+
+To initialise it to a git repository 
+$ git init
+Initialized empty Git repository in D:/DevOps/git-test-proj/.git/
+
+After this it will create a .get folder in project directory
+
+
+
+$ git status       # showing us all file present in project folder which are untrak OR Unstaged
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        My-Git-Notes.txt
+        New Text Document.txt
+        index.html
+        page1.html
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+To ignore .txt files from being part of git repository
+make a file called .gitignore and type in that file *.txt it will ignore all .txt files
+
+
+To add a file to track OR in Staging use
+git add . OR -A OR index.html OR --all
+
+$ git add .
+
+$ git status  # all file being added to Staging OR Tracked
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+        new file:   My-Git-Notes.txt
+        new file:   New Text Document.txt
+        new file:   index.html
+        new file:   page1.html
+
+
+To commit file from staging to repository
+$ git commit -m "My first commit : all file"
+[master (root-commit) 82f8d65] My first commit : all file
+ 3 files changed, 50 insertions(+)
+ create mode 100644 .gitignore
+ create mode 100644 index.html
+ create mode 100644 page1.html
+
+To stop tracking a file, we must remove it from the index:
+
+git rm --cached <file>
+
+To remove a folder and all files in the folder recursively:
+
+git rm -r --cached <folder>
+
+Then:
+
+git commit -am "Remove ignored files"
+
+
+$ git rm --cached My-Git-Notes.txt
+rm 'My-Git-Notes.txt'
+
+To show what would be committed
+$ git commit --dry-run
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        deleted:    My-Git-Notes.txt
+
+$ git commit -m "My-git-Notes.txt deleted from tracking OR staging"
+[master aee9050] My-git-Notes.txt deleted from tracking OR staging
+ 1 file changed, 60 deletions(-)
+ delete mode 100644 My-Git-Notes.txt
+
+$ git status
+On branch master
+nothing to commit, working tree clean
+
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   index.html
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        page2.html
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+To commit index.html file first we need to add it to staging then commits
+this we can do or ommit some file form commiting like we only commited index.html while 
+ommiting page2.html
+
+$ git add index.html
+
+$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   index.html
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        page2.html
+
+$ git commit -m "Second Commit : index.html"
+[master 7c8edfe] Second Commit : index.html
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+$ git diff
+diff --git a/index.html b/index.html
+index bd80d2d..81ee11a 100644
+--- a/index.html
++++ b/index.html
+@@ -1,5 +1,6 @@
+ <body bgcolor="pink">
+
+     <a href="page1.html">Page 1</a>
+-    <a href="page2.html">Page 1</a> # - this line actually updated from 1 to 2
++    <a href="page2.html">Page 2</a>
++    <a href="page3.html">Page 3</a> # + this line added
+ </body>
+\ No newline at end of file
+
+
+To restore to the previous version 
+
+$ git restore index.html # restored to the last commited changed
+
+AliAyesha@DESKTOP-EM3J1M0 MINGW64 /d/DevOps/git-test-proj (master)
+$ git status
+On branch master
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        page2.html
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+
+git restore
+The "restore" command helps to unstage or even discard uncommitted local changes.
+On the one hand, the command can be used to undo the effects of git add and unstage changes you have previously added to the Staging Area.
+On the other hand, the restore command can also be used to discard local changes in a file, thereby restoring its last committed state.
+
+$ git restore --staged index.html
+
+To view the commit history OR LOg
+$ git log
+commit 7c8edfec02e2c4ce5c5a81596063a0a93a9b6b45 (HEAD -> master)
+Author: umerhasan.learning@gmail.com <umerhasan.learning@gmail.com>
+Date:   Sun Dec 31 00:23:43 2023 +0530
+
+    Second Commit : index.html
+
+commit aee9050e6ab5a76cf6c58ac754e9df9d60f1eed9
+Author: umerhasan.learning@gmail.com <umerhasan.learning@gmail.com>
+Date:   Sun Dec 31 00:11:31 2023 +0530
+
+    My-git-Notes.txt deleted from tracking OR staging
+
+commit a23659016351d655e2acd352d51ec515473da97e
+Author: umerhasan.learning@gmail.com <umerhasan.learning@gmail.com>
+Date:   Sat Dec 30 23:50:14 2023 +0530
+
+    My first commit : all file
+
+commit 82f8d6553751d062ea00c9b9e44612a92fcf402d
+Author: umerhasan.learning@gmail.com <umerhasan.learning@gmail.com>
+Date:   Sat Dec 30 23:43:18 2023 +0530
+
+    My first commit : all file
+
+$ git log --oneline
+7c8edfe (HEAD -> master) Second Commit : index.html
+aee9050 My-git-Notes.txt deleted from tracking OR staging
+a236590 My first commit : all file
+82f8d65 My first commit : all file
+
+To view the entire log history
+$ git log -p
+commit 7c8edfec02e2c4ce5c5a81596063a0a93a9b6b45 (HEAD -> master)
+Author: umerhasan.learning@gmail.com <umerhasan.learning@gmail.com>
+Date:   Sun Dec 31 00:23:43 2023 +0530
+
+    Second Commit : index.html
+
+diff --git a/index.html b/index.html
+index 397ecf7..bd80d2d 100644
+--- a/index.html
++++ b/index.html
+@@ -1,5 +1,5 @@
+ <body bgcolor="pink">
+
+     <a href="page1.html">Page 1</a>
+-
++    <a href="page2.html">Page 1</a>
+ </body>
+\ No newline at end of file
+
+commit aee9050e6ab5a76cf6c58ac754e9df9d60f1eed9
+Author: umerhasan.learning@gmail.com <umerhasan.learning@gmail.com>
+Date:   Sun Dec 31 00:11:31 2023 +0530
+....
+....
+.....
+Q # To exit from this log
+
+$ git log --oneline
+619e1b6 (HEAD -> master) page2.html comiited
+7c8edfe Second Commit : index.html
+aee9050 My-git-Notes.txt deleted from tracking OR staging
+a236590 My first commit : all file
+82f8d65 My first commit : all file
+
+$ git reset aee9050   # this will rest the repository to aee9050 this commit status
+Unstaged changes after reset:
+M       index.html
+
+
+AliAyesha@DESKTOP-EM3J1M0 MINGW64 /d/DevOps/git-test-proj (master)
+$ git add .
+
+AliAyesha@DESKTOP-EM3J1M0 MINGW64 /d/DevOps/git-test-proj (master)
+$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   index.html
+        new file:   page2.html
+
+
+AliAyesha@DESKTOP-EM3J1M0 MINGW64 /d/DevOps/git-test-proj (master)
+$ git commit -a -m "Commit after reset test"
+[master d0aec2e] Commit after reset test
+ 2 files changed, 4 insertions(+), 1 deletion(-)
+ create mode 100644 page2.html
+
+To modify change and reorder in git history book
+
+
