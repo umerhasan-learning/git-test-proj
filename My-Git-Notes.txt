@@ -259,5 +259,25 @@ $ git commit -a -m "Commit after reset test"
  create mode 100644 page2.html
 
 To modify change and reorder in git history book
+git rebase -i --root 
+
+To create a branch
+$ git branch dev-user1
+
+$ git branch
+  dev-user1
+* master    # * show master is current active brach 
+
+To switch to say dev-user1 brach
+AliAyesha@DESKTOP-EM3J1M0 MINGW64 /d/DevOps/git-test-proj (master)
+$ git switch dev-user1
+Switched to branch 'dev-user1'
+M       My-Git-Notes.txt
+
+AliAyesha@DESKTOP-EM3J1M0 MINGW64 /d/DevOps/git-test-proj (dev-user1)
+$ git branch
+* dev-user1   # * show master is current active brach 
+  master
+
 
 
